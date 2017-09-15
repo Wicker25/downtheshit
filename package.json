@@ -1,0 +1,13 @@
+{
+  "name": "downtheshit",
+  "version": "0.1.0",
+  "dependencies": {
+    "selenium-standalone": "^6.9.0"
+  },
+  "scripts": {
+    "start": "node ./main.js",
+    "selenium": "./node_modules/.bin/selenium-standalone start"
+  },
+  "author": "Giacomo Trudu aka Wicker25",
+  "license": "MIT"
+}

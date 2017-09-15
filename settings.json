@@ -1,0 +1,52 @@
+{
+  "url": "http://www.downthesofa.com/",
+  "username": "test@email.com",
+  "password": "******",
+  "delay": 3000,
+  "menu": [
+    {
+      "name": "Sushi King",
+      "choices": [
+        {
+          "category": "Hoso Maki - Small Sushi Rolls - 8 Pieces",
+          "product": ["Salmon/Tuna"]
+        },
+        {
+          "category": "Nigiri - Fresh Fillets Pressed Onto Rice",
+          "product": ["Nigiri: 6 Pieces. Salmon, Prawn"]
+        }
+      ]
+    },
+    {
+      "name": "Tolteca Baggot",
+      "choices": [
+        {
+          "category": "Burritos, Fajitas And Lots More",
+          "product": [
+            "Fajita",
+            "White rice",
+            "Chicken",
+            "Grilled peppers and onions",
+            ["Pico de Gallo"],
+            "Cheese",
+            ["Guacamole"],
+            [""]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Sushida",
+      "choices": [
+        { "category": "Sashimi", "product": ["Tuna Sashimi"] },
+        { "category": "Hosomaki (8 Pieces)", "product": ["Spicy Tuna Roll"] }
+      ]
+    },
+    {
+      "name": "Doughboys",
+      "choices": [
+        { "category": "Sandwiches", "product": ["Club"] }
+      ]
+    }
+  ]
+}
