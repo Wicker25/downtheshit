@@ -88,12 +88,12 @@ module.exports = function (SETTINGS) {
     var chooseProduct = function (name) {
         var products = getProducts();
 
+        // Handle multiple choices for ingredients
         if ($.isArray(name)) {
             $.each(name, function (i, n) {
                 chooseItem(n, products);
             });
 
-            // NOTE: this doesn't support multiple choice for ingredients
             setTimeout(function () {
                 $('#idDivProd .messageLeftFinish:visible:first').click();
             }, 1000);
