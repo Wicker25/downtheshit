@@ -1,4 +1,4 @@
-module.exports = function (SETTINGS) {
+module.exports = function (SETTINGS, DONE) {
     /**
      * Add some extra methods for handling DOM elements.
      */
@@ -94,7 +94,7 @@ module.exports = function (SETTINGS) {
                 chooseItem(n, products);
             });
 
-            setTimeout(function () {
+            _setTimeout(function () {
                 $('#idDivProd .messageLeftFinish:visible:first').click();
             }, 1000);
         } else {
@@ -152,6 +152,8 @@ module.exports = function (SETTINGS) {
 
         if (pattern.test(button.text())) {
             button.click();
+
+            DONE('Order completed successfully');
         }
     };
 
@@ -186,14 +188,14 @@ module.exports = function (SETTINGS) {
     TaskManager.run = function () {
         var that = this;
 
-        var timer = setInterval(function () {
+        var timer = _setInterval(function () {
             that.perform();
 
             if (!that.length) {
                 clearInterval(timer);
 
                 // Perform the checkout
-                setTimeout(function () { performCheckout(); }, SETTINGS.delay);
+                _setTimeout(function () { performCheckout(); }, SETTINGS.delay);
             }
         }, SETTINGS.delay);
     };

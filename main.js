@@ -1,37 +1,102 @@
-var webdriverio = require('webdriverio');
+const webdriver    = require('selenium-webdriver');
+const chromeDriver = require('selenium-webdriver/chrome');
 
-var SETTINGS = require('./settings.json');
+const SETTINGS = require('./settings.json');
 
-var SCRIPTS = [
+const SCRIPTS = [
     { path: './scripts/sign-in.js',    timeout: 10000 },
     { path: './scripts/order-food.js', timeout: 120000 }
 ];
 
-var client = webdriverio.remote({
-    desiredCapabilities: {
-        browserName: 'google-chrome'
+/**
+ * Executes the JavaScript source in the browser context.
+ *
+ * @param {string} source   The JavaScript source.
+ * @param {Object} SETTINGS The settings.
+ * @param {Object} DONE     The callback for returning a value to the script context.
+ */
+function scriptRunner(source, SETTINGS, DONE) {
+    function sendResult(value) {
+        DONE({ value: value })
     }
-});
 
-var browser = client
-    .init()
-    .url(SETTINGS.url)
+    function exceptionHandler(fun) {
+        return function () {
+            try {
+                fun.apply(null, arguments);
+            } catch (e) {
+                DONE({
+                    error: e.name,
+                    stack: e.stack
+                });
+            }
+        };
+    }
+
+    // Wrap asynchronous functions
+    window._setTimeout = function (f) {
+        arguments[0] = exceptionHandler(f);
+        return window.setTimeout.apply(this, arguments);
+    };
+
+    window._setInterval = function (f) {
+        arguments[0] = exceptionHandler(f);
+        return window.setInterval.apply(this, arguments);
+    };
+
+    // Run the script
+    var runner = exceptionHandler(
+        new Function('return ' + source)()
+    );
+
+    runner(SETTINGS, sendResult);
+}
+
+/**
+ * Parses the result of the JavaScript executed in the browser context.
+ *
+ * @param {Object} result The result to parse.
+ */
+function parseResult(result) {
+    if (typeof result.error !== 'undefined') {
+        console.log(
+            'ERROR "' + result.error + '"\n' +
+            result.stack
+        );
+    } else if (typeof result.value !== 'undefined') {
+        console.log('RESULT "' + result.value + '"');
+    }
+}
+
+/**
+ * RUN THE SCRIPTS
+ */
+let options = new chromeDriver.Options();
+options.addArguments(
+    'headless',
+    'disable-gpu'
+);
+
+let driver = new webdriver.Builder()
+    .forBrowser('chrome')
+    .setChromeOptions(options)
+    .build()
 ;
+
+driver.get(SETTINGS.url);
 
 SCRIPTS.forEach(function (script) {
     console.log('INJECT "' + script.path + '"');
 
     var source = require(script.path);
-    browser = browser
-        .execute(source, SETTINGS)
-        .pause(script.timeout)
+
+    driver.manage()
+        .setTimeouts({ script: script.timeout })
+    ;
+
+    driver.executeAsyncScript(scriptRunner, source, SETTINGS)
+        .then(parseResult)
     ;
 });
 
-browser
-    .end()
-        .catch(function (error) {
-            console.error(error.stack);
-            return client.end();
-        })
-;
+driver.quit();
