@@ -128,7 +128,7 @@ module.exports = function (SETTINGS, DONE) {
      * Fills the shopping cart.
      */
     var fillShoppingCart = function () {
-        var choices = SETTINGS.menu[0].choices;
+        var choices = Store.restaurant.choices;
 
         $.each(choices, function (i, choice) {
             TaskManager.enqueue(
@@ -153,7 +153,14 @@ module.exports = function (SETTINGS, DONE) {
         if (pattern.test(button.text())) {
             button.click();
 
-            DONE('Order completed successfully');
+            var productList = $.map(Store.restaurant.choices, function (choice) {
+                return choice.category + '/' + choice.product[0];
+            });
+
+            DONE(
+                'Order completed successfully: ' +
+                productList.join(', ')
+            );
         }
     };
 
