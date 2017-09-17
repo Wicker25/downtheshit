@@ -20,7 +20,7 @@ module.exports = function (SETTINGS, DONE) {
     /**
      * Returns the list of restaurants.
      *
-     * @returns {Array}
+     * @returns {Array} The list of restaurants.
      */
     var getRestaurants = function () {
         return $('#idListRestaurants .divRestaurant').map(function () {
@@ -34,7 +34,7 @@ module.exports = function (SETTINGS, DONE) {
     /**
      * Return the current list of categories.
      *
-     * @returns {Array}
+     * @returns {Array} The list of categories.
      */
     var getCategories = function () {
         return $('#idDivCat .messageLeft').map(function () {
@@ -45,7 +45,7 @@ module.exports = function (SETTINGS, DONE) {
     /**
      * Return the current list of products.
      *
-     * @returns {Array}
+     * @returns {Array} The list of products.
      */
     var getProducts = function () {
         return $('#idDivProd .messageLeft').map(function () {
@@ -56,8 +56,8 @@ module.exports = function (SETTINGS, DONE) {
     /**
      * Looks for a item matching a specific name and click on it.
      *
-     * @param name  The item name.
-     * @param items The list of items.
+     * @param {string} name  The item name.
+     * @param {Array} items The list of items.
      */
     var chooseItem = function (name, items) {
         var pattern = new RegExp(name);
@@ -74,7 +74,7 @@ module.exports = function (SETTINGS, DONE) {
     /**
      * Looks for a category matching a specific name and click on it.
      *
-     * @param name The category name.
+     * @param {string} name The category name.
      */
     var chooseCategory = function (name) {
         chooseItem(name, getCategories());
@@ -83,7 +83,7 @@ module.exports = function (SETTINGS, DONE) {
     /**
      * Looks for a product matching a specific name and click on it.
      *
-     * @param name The product name.
+     * @param {string} name The product name.
      */
     var chooseProduct = function (name) {
         var products = getProducts();

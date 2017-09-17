@@ -20,10 +20,10 @@ function scriptRunner(source, SETTINGS, DONE) {
         DONE({ value: value })
     }
 
-    function exceptionHandler(fun) {
+    function exceptionHandler(f) {
         return function () {
             try {
-                fun.apply(null, arguments);
+                f.apply(null, arguments);
             } catch (e) {
                 DONE({
                     error: e.name,
