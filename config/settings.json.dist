@@ -9,7 +9,7 @@
       "choices": [
         {
           "category": "Hoso Maki - Small Sushi Rolls - 8 Pieces",
-          "product": ["Salmon/Tuna"]
+          "product": ["Salmon\\/Tuna"]
         },
         {
           "category": "Nigiri - Fresh Fillets Pressed Onto Rice",
@@ -39,7 +39,43 @@
       "name": "Sushida",
       "choices": [
         { "category": "Sashimi", "product": ["Tuna Sashimi"] },
-        { "category": "Hosomaki (8 Pieces)", "product": ["Spicy Tuna Roll"] }
+        { "category": "Hosomaki \\(8 Pieces\\)", "product": ["Spicy Tuna Roll"] }
+      ]
+    },
+    {
+      "name": "Farmer Browns",
+      "choices": [
+        {
+          "category": "Sandwiches",
+          "product": ["Club Sandwich", [""]]
+        }
+      ]
+    },
+    {
+      "name": "Check 22",
+      "choices": [
+        {
+          "category": "Sandwiches",
+          "product": ["Cuban Pork Sandwich", "Ciabatta"]
+        }
+      ]
+    },
+    {
+      "name": "Dagwood's of Dublin",
+      "choices": [
+        {
+          "category": "Homemade Sandwiches",
+          "product": ["Caprese Ciabatta", [""], ["Salt & Vinegar"]]
+        }
+      ]
+    },
+    {
+      "name": "Juniors Deli",
+      "choices": [
+        {
+          "category": "Lunch Sandwiches",
+          "product": ["Chargrilled Chicken", [""]]
+        }
       ]
     },
     {

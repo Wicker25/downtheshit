@@ -1,7 +1,7 @@
 const webdriver    = require('selenium-webdriver');
 const chromeDriver = require('selenium-webdriver/chrome');
 
-const SETTINGS = require('./settings.json');
+const SETTINGS = require('./config/settings.json');
 
 const SCRIPTS = [
     { path: './scripts/sign-in.js',    timeout: 10000 },
@@ -11,9 +11,9 @@ const SCRIPTS = [
 /**
  * Executes the JavaScript source in the browser context.
  *
- * @param {string} source   The JavaScript source.
- * @param {Object} SETTINGS The settings.
- * @param {Object} DONE     The callback for returning a value to the script context.
+ * @param {string}   source   The JavaScript source.
+ * @param {Object}   SETTINGS The settings.
+ * @param {Function} DONE     The callback for returning a value to the script context.
  */
 function scriptRunner(source, SETTINGS, DONE) {
     function sendResult(value) {
