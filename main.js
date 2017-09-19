@@ -1,6 +1,8 @@
 const webdriver    = require('selenium-webdriver');
 const chromeDriver = require('selenium-webdriver/chrome');
 
+const fs = require('fs');
+
 const SETTINGS = require('./config/settings.json');
 
 const SCRIPTS = [
@@ -66,6 +68,11 @@ function parseResult(result) {
     } else if (typeof result.value !== 'undefined') {
         console.log('RESULT "' + result.value + '"');
     }
+
+    // Save a screenshot
+    driver.takeScreenshot().then(function (data) {
+        fs.writeFileSync('logs/screenshot.png', data, 'base64');
+    });
 }
 
 /**
