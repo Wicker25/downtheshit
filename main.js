@@ -81,7 +81,8 @@ function parseResult(result) {
 let options = new chromeDriver.Options();
 options.addArguments(
     'headless',
-    'disable-gpu'
+    'disable-gpu',
+    'window-size=1024,768'
 );
 
 let driver = new webdriver.Builder()
