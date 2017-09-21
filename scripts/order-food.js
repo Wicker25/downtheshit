@@ -122,6 +122,10 @@ module.exports = function (SETTINGS, DONE) {
                 return false;
             }
         });
+
+        if (!Store.restaurant) {
+            throw new Error('Couldn\'t find any restaurant');
+        }
     };
 
     /**

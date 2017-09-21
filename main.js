@@ -28,7 +28,7 @@ function scriptRunner(source, SETTINGS, DONE) {
                 f.apply(null, arguments);
             } catch (e) {
                 DONE({
-                    error: e.name,
+                    error: e.message,
                     stack: e.stack
                 });
             }
@@ -62,8 +62,8 @@ function scriptRunner(source, SETTINGS, DONE) {
 function parseResult(result) {
     if (typeof result.error !== 'undefined') {
         console.log(
-            'ERROR "' + result.error + '"\n' +
-            result.stack
+            'ERROR "' + result.error + '"\n\n' +
+            result.stack.replace(/^/mg, '>>> ')
         );
     } else if (typeof result.value !== 'undefined') {
         console.log('RESULT "' + result.value + '"');
